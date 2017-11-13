@@ -1,19 +1,14 @@
-.header {
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-h1 {
-  font-family: 'Roboto', sans-serif;
-  color: #ff4b4b;
-  font-size: 40px;
-}
-  
-.select-section {
+.header-section {
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-fields {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
 }

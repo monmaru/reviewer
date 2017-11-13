@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import SelectField from 'material-ui/SelectField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import Table from './Table';
+import TwoLevelPieChart from './PieChart';
 import fetchReviews from '../domain/client';
 import { listPlatform, listAppName } from '../config';
+
+const styles = {
+  customWidth: {
+    width: 300,
+  },
+};
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +50,7 @@ class App extends Component {
         }))
       .catch((err) => {
         console.log(err);
-        alert('レビューの取得でエラーが発生しました。')
+        alert('レビューの取得でエラーが発生しました。');
       });
   }
 
@@ -50,12 +58,15 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="main">
-          <div className="header">
-            <h1>Mobile App Review</h1>
-          </div>
-          <section>
-            <div className="select-section">
+          <AppBar
+            title="Recent mobile app reviews"
+            showMenuIconButton={false}
+            style={{ backgroundColor: '#212121' }}
+          />
+          <section className="header-section">
+            <div className="select-fields">
               <SelectField
+                style={styles.customWidth}
                 floatingLabelText="Platform"
                 onChange={(event, key, payload) => this.onPlatformChanged(payload)}
                 value={this.state.platform}
@@ -65,6 +76,7 @@ class App extends Component {
                   <MenuItem key={platform} value={platform} primaryText={platform} />)}
               </SelectField>
               <SelectField
+                style={styles.customWidth}
                 floatingLabelText="App name"
                 onChange={(event, key, payload) => this.onAppNameChanged(payload)}
                 value={this.state.appName}
@@ -74,6 +86,7 @@ class App extends Component {
                   <MenuItem key={appName} value={appName} primaryText={appName} />)}
               </SelectField>
             </div>
+            <TwoLevelPieChart reviews={this.state.reviews} />
           </section>
           <Table
             data={this.state.reviews}
