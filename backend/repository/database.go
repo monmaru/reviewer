@@ -10,8 +10,8 @@ import (
 
 // DB ...
 type DB interface {
-	ReadAllIOS(appName string) ([]model.Review, error)
-	ReadAllAndroid(appName string) ([]model.Review, error)
+	ReadAllIOS(appName string, limit int) ([]model.Review, error)
+	ReadAllAndroid(appName string, limit int) ([]model.Review, error)
 }
 
 // ReviewRepository ...
@@ -30,20 +30,38 @@ func (r *ReviewRepository) open() (*sql.DB, error) {
 }
 
 // ReadAllIOS ...
-func (r *ReviewRepository) ReadAllIOS(appName string) ([]model.Review, error) {
-	return r.readAll("appstore", appName)
+func (r *ReviewRepository) ReadAllIOS(appName string, limit int) ([]model.Review, error) {
+	return r.readAll("appstore", appName, limit)
 }
 
 // ReadAllAndroid ...
-func (r *ReviewRepository) ReadAllAndroid(appName string) ([]model.Review, error) {
-	return r.readAll("googleplay", appName)
+func (r *ReviewRepository) ReadAllAndroid(appName string, limit int) ([]model.Review, error) {
+	return r.readAll("googleplay", appName, limit)
 }
 
-func (r *ReviewRepository) readAll(tableName, appName string) ([]model.Review, error) {
+const queryTmpl = `
+SELECT
+    title,
+    content,
+    author,
+    rating,
+    date,
+    version
+FROM
+    %s
+WHERE
+    app_name = '%s'
+ORDER BY
+    date DESC
+LIMIT %d
+;`
+
+func (r *ReviewRepository) readAll(tableName, appName string, limit int) ([]model.Review, error) {
 	query := fmt.Sprintf(
-		"SELECT title, content, author, rating, date, version FROM %s WHERE app_name = '%s'",
+		queryTmpl,
 		tableName,
 		appName,
+		limit,
 	)
 
 	db, err := r.open()

@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   updateReviews(platform, appName) {
-    fetchReviews(platform, appName)
+    fetchReviews(platform, appName, 100)
       .then(reviews =>
         this.setState({
           reviews,
@@ -59,7 +59,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="main">
           <AppBar
-            title="Recent mobile app reviews"
+            title="Recent mobile app 100 reviews"
             showMenuIconButton={false}
             style={{ backgroundColor: '#212121' }}
           />
