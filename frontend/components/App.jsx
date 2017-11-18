@@ -9,8 +9,8 @@ import createHistory from 'history/createBrowserHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import HomePage from './HomePage';
-import AboutPage from './AboutPage';
+import Home from './Home';
+import About from './About';
 
 
 const history = createHistory();
@@ -27,21 +27,21 @@ class App extends Component {
     this.state = {
       tab: 'home',
     };
-    this.handleTabChange = this.handleTabChange.bind(this);
+    this.setTabState = this.setTabState.bind(this);
   }
 
   componentWillMount() {
     history.listen((location) => {
       const path = location.pathname;
       if (path === '/') {
-        this.handleTabChange('home');
+        this.setTabState('home');
       } else if (path === '/about') {
-        this.handleTabChange('about');
+        this.setTabState('about');
       }
     });
   }
 
-  handleTabChange(tab) {
+  setTabState(tab) {
     this.setState({ tab });
   }
 
@@ -61,7 +61,7 @@ class App extends Component {
               iconElementRight={
                 <Tabs
                   value={this.state.tab}
-                  onChange={this.handleTabChange}
+                  onChange={this.setTabState}
                 >
                   <Tab
                     label="Home"
@@ -79,8 +79,8 @@ class App extends Component {
               }
             />
             <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/about" component={AboutPage} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
             </Switch>
           </div>
         </Router>

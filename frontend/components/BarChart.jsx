@@ -27,6 +27,16 @@ const BarChart = ({ reviews }) => {
         data={data}
         width={450}
         height={200}
+        options={{
+          scales: {
+            xAxes: [{
+              ticks: {
+                min: 0,
+                beginAtZero: true,
+              },
+            }],
+          },
+        }}
       />
     </div>
   );

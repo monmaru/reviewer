@@ -3,9 +3,9 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Table from './Table';
 import BarChart from './BarChart';
+import ScrollTopButton from './ScrollTopButton';
 import fetchReviews from '../domain/client';
 import { listPlatform, listAppName } from '../config';
-
 
 const styles = {
   customWidth: {
@@ -13,7 +13,7 @@ const styles = {
   },
 };
 
-class HomePage extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,6 @@ class HomePage extends Component {
         alert('レビューの取得でエラーが発生しました。');
       });
   }
-
   render() {
     return (
       <div>
@@ -110,9 +109,10 @@ class HomePage extends Component {
             ]}
           />
         </div>
+        <ScrollTopButton />
       </div>
     );
   }
 }
 
-export default HomePage;
+export default Home;
