@@ -89,11 +89,11 @@ class TwoLevelPieChart extends Component {
 
   render() {
     const data = [
-      { name: '⭐', value: 0 },
-      { name: '⭐⭐', value: 0 },
-      { name: '⭐⭐⭐', value: 0 },
-      { name: '⭐⭐⭐⭐', value: 0 },
-      { name: '⭐⭐⭐⭐⭐', value: 0 },
+      { name: '★☆☆☆☆', value: 0 },
+      { name: '★★☆☆☆', value: 0 },
+      { name: '★★★☆☆', value: 0 },
+      { name: '★★★★☆', value: 0 },
+      { name: '★★★★★', value: 0 },
     ];
     this.props.reviews.forEach((r) => {
       data[r.star - 1].value += 1;

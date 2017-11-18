@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import Table from './Table';
-import TwoLevelPieChart from './PieChart';
+import BarChart from './BarChart';
 import fetchReviews from '../domain/client';
 import { listPlatform, listAppName } from '../config';
 
@@ -55,11 +55,15 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div className="main">
+        <div className="main" style={{ paddingTop: 60 }}>
           <AppBar
             title="Recent mobile app 100 reviews"
             showMenuIconButton={false}
-            style={{ backgroundColor: '#212121' }}
+            style={{
+              backgroundColor: '#212121',
+              position: 'fixed',
+              top: 0,
+            }}
           />
           <section className="header-section">
             <div className="select-fields">
@@ -84,7 +88,7 @@ class App extends Component {
                   <MenuItem key={appName} value={appName} primaryText={appName} />)}
               </SelectField>
             </div>
-            <TwoLevelPieChart reviews={this.state.reviews} />
+            <BarChart reviews={this.state.reviews} />
           </section>
           <div className="reviews-table">
             <Table
