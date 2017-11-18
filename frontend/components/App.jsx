@@ -45,9 +45,7 @@ class App extends Component {
   updateReviews(platform, appName) {
     fetchReviews(platform, appName, 100)
       .then(reviews =>
-        this.setState({
-          reviews,
-        }))
+        this.setState({ reviews }))
       .catch((err) => {
         console.log(err);
         alert('レビューの取得でエラーが発生しました。');
@@ -88,35 +86,37 @@ class App extends Component {
             </div>
             <TwoLevelPieChart reviews={this.state.reviews} />
           </section>
-          <Table
-            data={this.state.reviews}
-            header={[
-              {
-                name: 'Title',
-                prop: 'title',
-              },
-              {
-                name: 'Comment',
-                prop: 'comment',
-              },
-              {
-                name: 'Author',
-                prop: 'author',
-              },
-              {
-                name: 'Star',
-                prop: 'star',
-              },
-              {
-                name: 'Date',
-                prop: 'date',
-              },
-              {
-                name: 'Version',
-                prop: 'version',
-              },
-            ]}
-          />
+          <div className="reviews-table">
+            <Table
+              data={this.state.reviews}
+              header={[
+                {
+                  name: 'Title',
+                  prop: 'title',
+                },
+                {
+                  name: 'Comment',
+                  prop: 'comment',
+                },
+                {
+                  name: 'Author',
+                  prop: 'author',
+                },
+                {
+                  name: 'Star',
+                  prop: 'star',
+                },
+                {
+                  name: 'Date',
+                  prop: 'date',
+                },
+                {
+                  name: 'Version',
+                  prop: 'version',
+                },
+              ]}
+            />
+          </div>
         </div>
       </MuiThemeProvider>
     );

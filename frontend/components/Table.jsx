@@ -9,11 +9,30 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+const styleByIndex = (i) => {
+  switch (i) {
+    case 0:
+      return { width: '13%', wordWrap: 'break-word', whiteSpace: 'normal' };
+    case 1:
+      return { width: '50%', wordWrap: 'break-word', whiteSpace: 'normal' };
+    case 2:
+      return { width: '10%', wordWrap: 'break-word', whiteSpace: 'normal' };
+    case 3:
+      return { width: '5%' };
+    case 4:
+      return { width: '15%' };
+    case 5:
+      return { width: '7%' };
+    default:
+      return { width: '10%' };
+  }
+};
+
 const row = (x, i, header) => (
   <TableRow key={`tr-${i}`}>
     {
       header.map((y, k) => (
-        <TableRowColumn key={`trc-${k}`}>
+        <TableRowColumn key={`trc-${k}`} style={styleByIndex(k)}>
           {x[y.prop]}
         </TableRowColumn>
       ))
@@ -22,9 +41,7 @@ const row = (x, i, header) => (
 );
 
 const ReviewTable = ({ data, header }) => (
-  <Table
-    selectable={false}
-  >
+  <Table selectable={false}>
     <TableHeader
       displaySelectAll={false}
       adjustForCheckbox={false}
@@ -32,7 +49,7 @@ const ReviewTable = ({ data, header }) => (
       <TableRow>
         {
           header.map((x, i) => (
-            <TableHeaderColumn key={`thc-${i}`}>
+            <TableHeaderColumn key={`thc-${i}`} style={styleByIndex(i)}>
               {x.name}
             </TableHeaderColumn>
           ))
