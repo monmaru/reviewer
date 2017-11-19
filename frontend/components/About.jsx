@@ -19,9 +19,13 @@ const About = () => (
     <p>
     各モバイルアプリのレビューのうち、<br />
     新着１００件を表示するサイトです。<br />
-    以下のライブラリを使用しています。<br />
+    以下のフレームワークを使用しています。<br />
     </p>
-    <img src="/static/ReactRedux.jpg" alt="React × Redux" style={imageStyle} />
+    <img
+      src="/static/ReactRedux.jpg"
+      alt="React × Redux"
+      style={imageStyle}
+    />
   </div>
 );
 

@@ -9,7 +9,7 @@ import { listPlatform, listAppName } from '../config';
 
 const styles = {
   customWidth: {
-    width: 300,
+    width: 350,
   },
 };
 
@@ -78,37 +78,35 @@ class Home extends Component {
           </div>
           <BarChart reviews={this.state.reviews} />
         </section>
-        <div className="reviews-table">
-          <Table
-            data={this.state.reviews}
-            header={[
-            {
-                name: 'Title',
-                prop: 'title',
-            },
-            {
-                name: 'Comment',
-                prop: 'comment',
-            },
-            {
-                name: 'Author',
-                prop: 'author',
-            },
-            {
-                name: 'Star',
-                prop: 'star',
-            },
-            {
-                name: 'Date',
-                prop: 'date',
-            },
-            {
-                name: 'Version',
-                prop: 'version',
-            },
-            ]}
-          />
-        </div>
+        <Table
+          data={this.state.reviews}
+          header={[
+          {
+              name: 'Title',
+              prop: 'title',
+          },
+          {
+              name: 'Comment',
+              prop: 'comment',
+          },
+          {
+              name: 'Author',
+              prop: 'author',
+          },
+          {
+              name: 'Star',
+              prop: 'star',
+          },
+          {
+              name: 'Date',
+              prop: 'date',
+          },
+          {
+              name: 'Version',
+              prop: 'version',
+          },
+          ]}
+        />
         <ScrollTopButton />
       </div>
     );

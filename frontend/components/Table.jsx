@@ -41,28 +41,30 @@ const row = (x, i, header) => (
 );
 
 const ReviewTable = ({ data, header }) => (
-  <Table selectable={false}>
-    <TableHeader
-      displaySelectAll={false}
-      adjustForCheckbox={false}
-    >
-      <TableRow>
-        {
-          header.map((x, i) => (
-            <TableHeaderColumn key={`thc-${i}`} style={styleByIndex(i)}>
-              {x.name}
-            </TableHeaderColumn>
-          ))
-        }
-      </TableRow>
-    </TableHeader>
-    <TableBody
-      displayRowCheckbox={false}
-      showRowHover
-    >
-      {data.map((x, i) => row(x, i, header))}
-    </TableBody>
-  </Table>
+  <div className="reviews-table">
+    <Table selectable={false}>
+      <TableHeader
+        displaySelectAll={false}
+        adjustForCheckbox={false}
+      >
+        <TableRow>
+          {
+            header.map((x, i) => (
+              <TableHeaderColumn key={`thc-${i}`} style={styleByIndex(i)}>
+                {x.name}
+              </TableHeaderColumn>
+            ))
+          }
+        </TableRow>
+      </TableHeader>
+      <TableBody
+        displayRowCheckbox={false}
+        showRowHover
+      >
+        {data.map((x, i) => row(x, i, header))}
+      </TableBody>
+    </Table>
+  </div>
 );
 
 ReviewTable.propTypes = {
