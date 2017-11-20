@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import SelectMenu from './SelectMenu';
 import Table from './Table';
 import BarChart from './BarChart';
-import ScrollTopButton from './ScrollTopButton';
+import ScrollToTopButton from './ScrollToTopButton';
 
 
 const Home = props => (
@@ -15,7 +15,7 @@ const Home = props => (
       <BarChart reviews={props.reviews} />
     </section>
     <Table reviews={props.reviews} />
-    <ScrollTopButton />
+    <ScrollToTopButton />
   </div>
 );
 
