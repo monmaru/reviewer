@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
   Route,
@@ -9,9 +10,11 @@ import createHistory from 'history/createBrowserHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import { connect } from 'react-redux';
+
 import Home from './Home';
 import About from './About';
-
+import { startFetch } from '../actions/';
 
 const history = createHistory();
 const BackGroundColor = '#212121';
@@ -31,6 +34,8 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.props.dispatch(startFetch());
+    // TODO react-router-redux
     history.listen((location) => {
       const path = location.pathname;
       if (path === '/') {
@@ -89,4 +94,8 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(App);

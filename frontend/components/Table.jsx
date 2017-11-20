@@ -28,7 +28,34 @@ const styleByIndex = (i) => {
   }
 };
 
-const row = (x, i, header) => (
+const header = [
+  {
+    name: 'Title',
+    prop: 'title',
+  },
+  {
+    name: 'Comment',
+    prop: 'comment',
+  },
+  {
+    name: 'Author',
+    prop: 'author',
+  },
+  {
+    name: 'Star',
+    prop: 'star',
+  },
+  {
+    name: 'Date',
+    prop: 'date',
+  },
+  {
+    name: 'Version',
+    prop: 'version',
+  },
+];
+
+const row = (x, i) => (
   <TableRow key={`tr-${i}`}>
     {
       header.map((y, k) => (
@@ -40,7 +67,7 @@ const row = (x, i, header) => (
   </TableRow>
 );
 
-const ReviewTable = ({ data, header }) => (
+const ReviewTable = ({ reviews }) => (
   <div className="reviews-table">
     <Table selectable={false}>
       <TableHeader
@@ -61,15 +88,14 @@ const ReviewTable = ({ data, header }) => (
         displayRowCheckbox={false}
         showRowHover
       >
-        {data.map((x, i) => row(x, i, header))}
+        {reviews.map((x, i) => row(x, i, header))}
       </TableBody>
     </Table>
   </div>
 );
 
 ReviewTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.any).isRequired,
-  header: PropTypes.arrayOf(PropTypes.any).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default ReviewTable;

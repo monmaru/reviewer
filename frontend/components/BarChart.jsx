@@ -21,6 +21,7 @@ const BarChart = ({ reviews }) => {
       },
     ],
   };
+
   return (
     <div>
       <HorizontalBar
