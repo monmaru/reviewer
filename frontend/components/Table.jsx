@@ -14,15 +14,15 @@ const styleByIndex = (i) => {
     case 0:
       return { width: '13%', wordWrap: 'break-word', whiteSpace: 'normal' };
     case 1:
-      return { width: '50%', wordWrap: 'break-word', whiteSpace: 'normal' };
+      return { width: '47%', wordWrap: 'break-word', whiteSpace: 'normal' };
     case 2:
       return { width: '10%', wordWrap: 'break-word', whiteSpace: 'normal' };
     case 3:
       return { width: '5%' };
     case 4:
-      return { width: '15%' };
+      return { width: '15%', wordWrap: 'break-word', whiteSpace: 'normal' };
     case 5:
-      return { width: '7%' };
+      return { width: '10%', wordWrap: 'break-word', whiteSpace: 'normal' };
     default:
       return { width: '10%' };
   }
