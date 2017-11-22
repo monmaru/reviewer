@@ -44,7 +44,9 @@ const BarChart = ({ reviews }) => {
 };
 
 BarChart.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.any).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    star: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default BarChart;

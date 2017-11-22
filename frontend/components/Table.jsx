@@ -95,7 +95,14 @@ const ReviewTable = ({ reviews }) => (
 );
 
 ReviewTable.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.any).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    star: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    version: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default ReviewTable;

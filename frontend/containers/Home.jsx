@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import SelectMenu from './SelectMenu';
-import Table from './Table';
-import BarChart from './BarChart';
-import ScrollToTopButton from './ScrollToTopButton';
+import Table from '../components/Table';
+import BarChart from '../components/BarChart';
+import ScrollToTopButton from '../components/ScrollToTopButton';
 
 
 const Home = props => (

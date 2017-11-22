@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  BrowserRouter as Router,
   Route,
   Link,
   Switch,
 } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { connect } from 'react-redux';
 
 import Home from './Home';
-import About from './About';
+import About from '../components/About';
 import { startFetch } from '../actions/';
 
-const history = createHistory();
 const BackGroundColor = '#212121';
 const TabStyle = {
   width: '150px',
@@ -24,36 +21,19 @@ const TabStyle = {
   color: 'white',
 };
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tab: 'home',
-    };
-    this.setTabState = this.setTabState.bind(this);
-  }
+const ConnectedSwitch = connect(state => ({
+  location: state.routing.location,
+}))(Switch);
 
+class App extends Component {
   componentWillMount() {
     this.props.dispatch(startFetch());
-    // TODO react-router-redux
-    history.listen((location) => {
-      const path = location.pathname;
-      if (path === '/') {
-        this.setTabState('home');
-      } else if (path === '/about') {
-        this.setTabState('about');
-      }
-    });
-  }
-
-  setTabState(tab) {
-    this.setState({ tab });
   }
 
   render() {
     return (
       <MuiThemeProvider>
-        <Router>
+        <ConnectedSwitch>
           <div className="main" style={{ paddingTop: 60 }}>
             <AppBar
               title="Recent mobile app 100 reviews"
@@ -65,18 +45,17 @@ class App extends Component {
               showMenuIconButton={false}
               iconElementRight={
                 <Tabs
-                  value={this.state.tab}
-                  onChange={this.setTabState}
+                  value={this.props.location.pathname}
                 >
                   <Tab
                     label="Home"
-                    value="home"
+                    value="/"
                     style={TabStyle}
                     containerElement={<Link to="/" />}
                   />
                   <Tab
                     label="About"
-                    value="about"
+                    value="/about"
                     style={TabStyle}
                     containerElement={<Link to="/about" />}
                   />
@@ -88,7 +67,7 @@ class App extends Component {
               <Route exact path="/about" component={About} />
             </Switch>
           </div>
-        </Router>
+        </ConnectedSwitch>
       </MuiThemeProvider>
     );
   }
@@ -96,6 +75,12 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 };
 
-export default connect()(App);
+export default connect(state => ({
+  location: state.routing.location,
+}))(App);
+

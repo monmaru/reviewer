@@ -1,8 +1,7 @@
 
-import { combineReducers } from 'redux';
 import { listPlatform, listAppName } from '../config';
 
-const reviews = (state = [], action) => {
+export const reviews = (state = [], action) => {
   switch (action.type) {
     case 'CHANGE_REVIEWS':
       return action.reviews;
@@ -11,7 +10,7 @@ const reviews = (state = [], action) => {
   }
 };
 
-const platform = (state = listPlatform[0], action) => {
+export const platform = (state = listPlatform[0], action) => {
   switch (action.type) {
     case 'CHANGE_PLATFORM':
       return action.platform;
@@ -20,7 +19,7 @@ const platform = (state = listPlatform[0], action) => {
   }
 };
 
-const appName = (state = listAppName[0], action) => {
+export const appName = (state = listAppName[0], action) => {
   switch (action.type) {
     case 'CHANGE_APP_NAME':
       return action.appName;
@@ -28,5 +27,3 @@ const appName = (state = listAppName[0], action) => {
       return state;
   }
 };
-
-export default combineReducers({ platform, reviews, appName });
