@@ -26,7 +26,7 @@ const ConnectedSwitch = connect(state => ({
 }))(Switch);
 
 class App extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch(startFetch());
   }
 
@@ -44,9 +44,7 @@ class App extends Component {
               }}
               showMenuIconButton={false}
               iconElementRight={
-                <Tabs
-                  value={this.props.location.pathname}
-                >
+                <Tabs value={this.props.location.pathname}>
                   <Tab
                     label="Home"
                     value="/"

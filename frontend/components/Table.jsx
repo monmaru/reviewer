@@ -70,10 +70,7 @@ const row = (x, i) => (
 const ReviewTable = ({ reviews }) => (
   <div className="reviews-table">
     <Table selectable={false}>
-      <TableHeader
-        displaySelectAll={false}
-        adjustForCheckbox={false}
-      >
+      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
         <TableRow>
           {
             header.map((x, i) => (
@@ -84,10 +81,7 @@ const ReviewTable = ({ reviews }) => (
           }
         </TableRow>
       </TableHeader>
-      <TableBody
-        displayRowCheckbox={false}
-        showRowHover
-      >
+      <TableBody displayRowCheckbox={false} showRowHover>
         {reviews.map((x, i) => row(x, i, header))}
       </TableBody>
     </Table>
