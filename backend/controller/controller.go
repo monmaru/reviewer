@@ -29,26 +29,26 @@ func readParams(r *http.Request) (string, int, error) {
 	return appName, limit, nil
 }
 
-// GetAllIOSReviews ...
-func (c *ReviewController) GetAllIOSReviews(w http.ResponseWriter, r *http.Request) error {
+// GetIOSReviews ...
+func (c *ReviewController) GetIOSReviews(w http.ResponseWriter, r *http.Request) error {
 	appName, limit, err := readParams(r)
 	if err != nil {
 		return err
 	}
-	reviews, err := c.db.ReadAllIOS(appName, limit)
+	reviews, err := c.db.ReadIOSApp(appName, limit)
 	if err != nil {
 		return err
 	}
 	return JSON(w, http.StatusOK, reviews)
 }
 
-// GetAllAndroidReviews ...
-func (c *ReviewController) GetAllAndroidReviews(w http.ResponseWriter, r *http.Request) error {
+// GetAndroidReviews ...
+func (c *ReviewController) GetAndroidReviews(w http.ResponseWriter, r *http.Request) error {
 	appName, limit, err := readParams(r)
 	if err != nil {
 		return err
 	}
-	reviews, err := c.db.ReadAllAndroid(appName, limit)
+	reviews, err := c.db.ReadAndroidApp(appName, limit)
 	if err != nil {
 		return err
 	}

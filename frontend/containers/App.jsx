@@ -15,10 +15,17 @@ import About from '../components/About';
 import { startFetch } from '../actions/';
 
 const BackGroundColor = '#212121';
-const TabStyle = {
-  width: '150px',
-  backgroundColor: BackGroundColor,
-  color: 'white',
+const styles = {
+  appBar: {
+    backgroundColor: BackGroundColor,
+    position: 'fixed',
+    top: 0,
+  },
+  tab: {
+    width: '150px',
+    backgroundColor: BackGroundColor,
+    color: 'white',
+  },
 };
 
 const ConnectedSwitch = connect(state => ({
@@ -37,24 +44,20 @@ class App extends Component {
           <div className="main" style={{ paddingTop: 60 }}>
             <AppBar
               title="Recent mobile app 100 reviews"
-              style={{
-                backgroundColor: BackGroundColor,
-                position: 'fixed',
-                top: 0,
-              }}
+              style={styles.appBar}
               showMenuIconButton={false}
               iconElementRight={
                 <Tabs value={this.props.location.pathname}>
                   <Tab
                     label="Home"
                     value="/"
-                    style={TabStyle}
+                    style={styles.tab}
                     containerElement={<Link to="/" />}
                   />
                   <Tab
                     label="About"
                     value="/about"
-                    style={TabStyle}
+                    style={styles.tab}
                     containerElement={<Link to="/about" />}
                   />
                 </Tabs>

@@ -9,8 +9,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-const styleByIndex = (i) => {
-  switch (i) {
+const styleByIndex = (idx) => {
+  switch (idx) {
     case 0:
       return { width: '13%', wordWrap: 'break-word', whiteSpace: 'normal' };
     case 1:

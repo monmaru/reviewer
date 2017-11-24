@@ -37,8 +37,8 @@ func (s *Server) route(db repository.DB) *mux.Router {
 
 	// REST API
 	c := controller.New(db)
-	router.Handle("/api/reviews/ios/{name}", try(c.GetAllIOSReviews)).Methods("GET")
-	router.Handle("/api/reviews/android/{name}", try(c.GetAllAndroidReviews)).Methods("GET")
+	router.Handle("/api/reviews/ios/{name}", try(c.GetIOSReviews)).Methods("GET")
+	router.Handle("/api/reviews/android/{name}", try(c.GetAndroidReviews)).Methods("GET")
 
 	// Static files
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

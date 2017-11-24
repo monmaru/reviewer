@@ -10,8 +10,8 @@ import (
 
 // DB ...
 type DB interface {
-	ReadAllIOS(appName string, limit int) ([]model.Review, error)
-	ReadAllAndroid(appName string, limit int) ([]model.Review, error)
+	ReadIOSApp(appName string, limit int) ([]model.Review, error)
+	ReadAndroidApp(appName string, limit int) ([]model.Review, error)
 }
 
 // ReviewRepository ...
@@ -24,18 +24,17 @@ func NewReviewRepository(path string) *ReviewRepository {
 	return &ReviewRepository{path: path}
 }
 
-// Open database
 func (r *ReviewRepository) open() (*sql.DB, error) {
 	return sql.Open("sqlite3", r.path)
 }
 
-// ReadAllIOS ...
-func (r *ReviewRepository) ReadAllIOS(appName string, limit int) ([]model.Review, error) {
+// ReadIOSApp ...
+func (r *ReviewRepository) ReadIOSApp(appName string, limit int) ([]model.Review, error) {
 	return r.readAll("appstore", appName, limit)
 }
 
-// ReadAllAndroid ...
-func (r *ReviewRepository) ReadAllAndroid(appName string, limit int) ([]model.Review, error) {
+// ReadAndroidApp ...
+func (r *ReviewRepository) ReadAndroidApp(appName string, limit int) ([]model.Review, error) {
 	return r.readAll("googleplay", appName, limit)
 }
 
