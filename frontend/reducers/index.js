@@ -1,7 +1,9 @@
 
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import { listPlatform, listAppName } from '../config';
 
-export const reviews = (state = [], action) => {
+const reviews = (state = [], action) => {
   switch (action.type) {
     case 'CHANGE_REVIEWS':
       return action.reviews;
@@ -10,7 +12,7 @@ export const reviews = (state = [], action) => {
   }
 };
 
-export const platform = (state = listPlatform[0], action) => {
+const platform = (state = listPlatform[0], action) => {
   switch (action.type) {
     case 'CHANGE_PLATFORM':
       return action.platform;
@@ -19,7 +21,7 @@ export const platform = (state = listPlatform[0], action) => {
   }
 };
 
-export const appName = (state = listAppName[0], action) => {
+const appName = (state = listAppName[0], action) => {
   switch (action.type) {
     case 'CHANGE_APP_NAME':
       return action.appName;
@@ -27,3 +29,20 @@ export const appName = (state = listAppName[0], action) => {
       return state;
   }
 };
+
+const loading = (state = true, action) => {
+  switch (action.type) {
+    case 'CHANGE_LOADING':
+      return action.loading;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  platform,
+  reviews,
+  appName,
+  loading,
+  routing: routerReducer,
+});

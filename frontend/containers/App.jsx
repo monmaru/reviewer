@@ -16,6 +16,9 @@ import { startFetch } from '../actions/';
 
 const BackGroundColor = '#212121';
 const styles = {
+  main: {
+    paddingTop: 60,
+  },
   appBar: {
     backgroundColor: BackGroundColor,
     position: 'fixed',
@@ -41,7 +44,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <ConnectedSwitch>
-          <div className="main" style={{ paddingTop: 60 }}>
+          <div className="main" style={styles.main}>
             <AppBar
               title="Recent mobile app 100 reviews"
               style={styles.appBar}

@@ -1,23 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 
-import { reviews, platform, appName } from './reducers/';
+import rootReducer from './reducers/';
 import App from './containers/App';
 
 const history = createHistory();
 const store = createStore(
-  combineReducers({
-    platform,
-    reviews,
-    appName,
-    routing: routerReducer,
-  }),
+  rootReducer,
   composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history))),
 );
 
