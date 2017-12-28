@@ -3,7 +3,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
 import Scroll from 'react-scroll';
 
-const ScrollTopButton = () => (
+const ScrollToTopButton = () => (
   <FloatingActionButton
     className="scroll-top-button"
     backgroundColor="#757575"
@@ -13,4 +13,4 @@ const ScrollTopButton = () => (
   </FloatingActionButton>
 );
 
-export default ScrollTopButton;
+export default ScrollToTopButton;

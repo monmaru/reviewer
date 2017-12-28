@@ -30,12 +30,12 @@ func (r *ReviewRepository) open() (*sql.DB, error) {
 
 // ReadIOSApp ...
 func (r *ReviewRepository) ReadIOSApp(appName string, limit int) ([]model.Review, error) {
-	return r.readAll("appstore", appName, limit)
+	return r.read("appstore", appName, limit)
 }
 
 // ReadAndroidApp ...
 func (r *ReviewRepository) ReadAndroidApp(appName string, limit int) ([]model.Review, error) {
-	return r.readAll("googleplay", appName, limit)
+	return r.read("googleplay", appName, limit)
 }
 
 const queryTmpl = `
@@ -55,7 +55,7 @@ ORDER BY
 LIMIT %d
 ;`
 
-func (r *ReviewRepository) readAll(tableName, appName string, limit int) ([]model.Review, error) {
+func (r *ReviewRepository) read(tableName, appName string, limit int) ([]model.Review, error) {
 	query := fmt.Sprintf(
 		queryTmpl,
 		tableName,
