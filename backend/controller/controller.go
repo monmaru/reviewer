@@ -7,16 +7,21 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/monmaru/reviewer/backend/repository"
+	"go.uber.org/zap"
 )
 
 // ReviewController ...
 type ReviewController struct {
-	db repository.DB
+	db     repository.DB
+	logger *zap.Logger
 }
 
 // New ...
-func New(db repository.DB) *ReviewController {
-	return &ReviewController{db: db}
+func New(db repository.DB, logger *zap.Logger) *ReviewController {
+	return &ReviewController{
+		db:     db,
+		logger: logger,
+	}
 }
 
 func readParams(r *http.Request) (string, int, error) {
@@ -35,6 +40,11 @@ func (c *ReviewController) GetIOSReviews(w http.ResponseWriter, r *http.Request)
 	if err != nil {
 		return err
 	}
+	c.logger.Info("GetIOSReviews",
+		zap.String("app", appName),
+		zap.Int("limit", limit),
+	)
+	defer c.logger.Sync()
 	reviews, err := c.db.ReadIOSApp(appName, limit)
 	if err != nil {
 		return err
@@ -48,6 +58,11 @@ func (c *ReviewController) GetAndroidReviews(w http.ResponseWriter, r *http.Requ
 	if err != nil {
 		return err
 	}
+	c.logger.Info("GetAndroidReviews",
+		zap.String("app", appName),
+		zap.Int("limit", limit),
+	)
+	defer c.logger.Sync()
 	reviews, err := c.db.ReadAndroidApp(appName, limit)
 	if err != nil {
 		return err
