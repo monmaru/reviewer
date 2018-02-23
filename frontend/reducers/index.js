@@ -39,10 +39,20 @@ const loading = (state = true, action) => {
   }
 };
 
+const alertMessage = (state = null, action) => {
+  switch (action.type) {
+    case 'ALERT':
+      return action.alertMessage;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   platform,
   reviews,
   appName,
   loading,
+  alertMessage,
   routing: routerReducer,
 });

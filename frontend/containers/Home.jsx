@@ -9,6 +9,10 @@ import BarChart from '../components/BarChart';
 import ScrollToTopButton from '../components/ScrollToTopButton';
 
 const Home = (props) => {
+  if (props.alertMessage) {
+    alert(props.alertMessage);
+  }
+
   if (props.loading) {
     return (
       <div className="progress">
@@ -33,9 +37,11 @@ const Home = (props) => {
 Home.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.any).isRequired,
   loading: PropTypes.bool.isRequired,
+  alertMessage: PropTypes.string.isRequired,
 };
 
 export default connect(state => ({
   reviews: state.reviews,
   loading: state.loading,
+  alertMessage: state.alertMessage,
 }))(Home);

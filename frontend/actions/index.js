@@ -8,6 +8,8 @@ export const setAppName = appName => dispatch => dispatch({ type: 'CHANGE_APP_NA
 
 export const setLoading = loading => dispatch => dispatch({ type: 'CHANGE_LOADING', loading });
 
+export const setAlertMessage = alertMessage => dispatch => dispatch({ type: 'ALERT', alertMessage });
+
 export const startFetch = () => (dispatch, getState) => {
   const state = getState();
   return new Promise(resolve => setTimeout(() => resolve(), state.loading ? 200 : 0))
@@ -17,8 +19,9 @@ export const startFetch = () => (dispatch, getState) => {
       dispatch(setLoading(false));
     })
     .catch((err) => {
-      dispatch(setLoading(false));
       console.log(err);
-      alert('レビューの取得でエラーが発生しました。');
+      dispatch(setLoading(false));
+      dispatch(setAlertMessage('レビューの取得でエラーが発生しました。'));
+      dispatch(setAlertMessage(null));
     });
 };
