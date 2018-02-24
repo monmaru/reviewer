@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/monmaru/reviewer/backend/repository"
+	"github.com/patrickmn/go-cache"
 	"go.uber.org/zap"
 )
 
@@ -14,6 +16,7 @@ import (
 type ReviewController struct {
 	db     repository.DB
 	logger *zap.Logger
+	cache  *cache.Cache
 }
 
 // New ...
@@ -21,6 +24,7 @@ func New(db repository.DB, logger *zap.Logger) *ReviewController {
 	return &ReviewController{
 		db:     db,
 		logger: logger,
+		cache:  cache.New(5*time.Minute, 30*time.Second),
 	}
 }
 
@@ -40,15 +44,22 @@ func (c *ReviewController) GetIOSReviews(w http.ResponseWriter, r *http.Request)
 	if err != nil {
 		return err
 	}
-	c.logger.Info("GetIOSReviews",
-		zap.String("app", appName),
-		zap.Int("limit", limit),
-	)
+
+	c.logger.Info("GetIOSReviews", zap.String("app", appName), zap.Int("limit", limit))
 	defer c.logger.Sync()
+
+	cacheKey := "ios" + appName + strconv.Itoa(limit)
+	if cv, found := c.cache.Get(cacheKey); found {
+		c.logger.Info("Cache hit", zap.String("app", appName), zap.Int("limit", limit))
+		return JSON(w, http.StatusOK, cv)
+	}
+
 	reviews, err := c.db.ReadIOSApp(appName, limit)
 	if err != nil {
 		return err
 	}
+
+	c.cache.Set(cacheKey, reviews, cache.DefaultExpiration)
 	return JSON(w, http.StatusOK, reviews)
 }
 
@@ -58,15 +69,22 @@ func (c *ReviewController) GetAndroidReviews(w http.ResponseWriter, r *http.Requ
 	if err != nil {
 		return err
 	}
-	c.logger.Info("GetAndroidReviews",
-		zap.String("app", appName),
-		zap.Int("limit", limit),
-	)
+
+	c.logger.Info("GetAndroidReviews", zap.String("app", appName), zap.Int("limit", limit))
 	defer c.logger.Sync()
+
+	cacheKey := "android" + appName + strconv.Itoa(limit)
+	if cv, found := c.cache.Get(cacheKey); found {
+		c.logger.Info("Cache hit", zap.String("app", appName), zap.Int("limit", limit))
+		return JSON(w, http.StatusOK, cv)
+	}
+
 	reviews, err := c.db.ReadAndroidApp(appName, limit)
 	if err != nil {
 		return err
 	}
+
+	c.cache.Set(cacheKey, reviews, cache.DefaultExpiration)
 	return JSON(w, http.StatusOK, reviews)
 }
 
