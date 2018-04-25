@@ -49,13 +49,13 @@ func New(dbPath string) *Server {
 }
 
 // Run ...
-func (s *Server) Run(addr string) {
+func (s *Server) Run(addr, reportDir string) {
 	log.Printf("start listening on %s", addr)
 	db := repository.NewReviewRepository(s.dbPath)
-	log.Fatal(http.ListenAndServe(addr, s.route(db)))
+	log.Fatal(http.ListenAndServe(addr, s.route(db, reportDir)))
 }
 
-func (s *Server) route(db repository.DB) *mux.Router {
+func (s *Server) route(db repository.DB, reportDir string) *mux.Router {
 	router := mux.NewRouter()
 	// Health check
 	router.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
@@ -77,6 +77,8 @@ func (s *Server) route(db repository.DB) *mux.Router {
 	})
 	router.PathPrefix("/static/").Handler(
 		http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
+	router.PathPrefix("/reports/").Handler(
+		http.StripPrefix("/reports/", http.FileServer(http.Dir(reportDir))))
 	return router
 }
 
