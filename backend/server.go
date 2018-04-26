@@ -75,10 +75,13 @@ func (s *Server) route(db repository.DB, reportDir string) *mux.Router {
 	router.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusMovedPermanently)
 	})
+	router.HandleFunc("/report", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusMovedPermanently)
+	})
 	router.PathPrefix("/static/").Handler(
 		http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
-	router.PathPrefix("/reports/").Handler(
-		http.StripPrefix("/reports/", http.FileServer(http.Dir(reportDir))))
+	router.PathPrefix("/download/").Handler(
+		http.StripPrefix("/download/", http.FileServer(http.Dir(reportDir))))
 	return router
 }
 

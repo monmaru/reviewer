@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 
 import Home from './Home';
 import About from '../components/About';
+import Report from '../components/Report';
 import { startFetch } from '../actions/';
 
 const BackGroundColor = '#212121';
@@ -58,6 +59,12 @@ class App extends Component {
                     containerElement={<Link to="/" />}
                   />
                   <Tab
+                    label="Report"
+                    value="/report"
+                    style={styles.tab}
+                    containerElement={<Link to="/report" />}
+                  />
+                  <Tab
                     label="About"
                     value="/about"
                     style={styles.tab}
@@ -68,6 +75,7 @@ class App extends Component {
             />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/report" component={Report} />
               <Route exact path="/about" component={About} />
             </Switch>
           </div>
