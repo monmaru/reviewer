@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -80,8 +81,14 @@ func (s *Server) route(db repository.DB, reportDir string) *mux.Router {
 	})
 	router.PathPrefix("/static/").Handler(
 		http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
-	router.PathPrefix("/download/").Handler(
-		http.StripPrefix("/download/", http.FileServer(http.Dir(reportDir))))
+	router.PathPrefix("/download/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, ".xlsx") {
+			w.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+			http.StripPrefix("/download/", http.FileServer(http.Dir(reportDir)))
+			return
+		}
+		w.WriteHeader(http.StatusNotFound)
+	})
 	return router
 }
 
