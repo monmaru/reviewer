@@ -3,8 +3,10 @@ package backend
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -82,12 +84,17 @@ func (s *Server) route(db repository.DB, reportDir string) *mux.Router {
 	router.PathPrefix("/static/").Handler(
 		http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
 	router.PathPrefix("/download/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if strings.HasSuffix(r.URL.Path, ".xlsx") {
-			w.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-			http.StripPrefix("/download/", http.FileServer(http.Dir(reportDir)))
+		paths := strings.Split(r.URL.Path, "/")
+		data, err := ioutil.ReadFile(filepath.Join(reportDir, paths[len(paths)-1]))
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
 			return
 		}
-		w.WriteHeader(http.StatusNotFound)
+
+		if strings.HasSuffix(r.URL.Path, ".xlsx") {
+			w.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		}
+		w.Write(data)
 	})
 	return router
 }
