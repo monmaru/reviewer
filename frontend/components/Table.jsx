@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 
 const styleByIndex = (idx) => {
   switch (idx) {
@@ -59,9 +57,9 @@ const row = (x, i) => (
   <TableRow key={`tr-${i}`}>
     {
       header.map((y, k) => (
-        <TableRowColumn key={`trc-${k}`} style={styleByIndex(k)}>
+        <TableCell key={`trc-${k}`} style={styleByIndex(k)}>
           {x[y.prop]}
-        </TableRowColumn>
+        </TableCell>
       ))
     }
   </TableRow>
@@ -70,17 +68,17 @@ const row = (x, i) => (
 const ReviewTable = ({ reviews }) => (
   <div className="reviews-table">
     <Table selectable={false}>
-      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+      <TableHead displaySelectAll={false} adjustForCheckbox={false}>
         <TableRow>
           {
             header.map((x, i) => (
-              <TableHeaderColumn key={`thc-${i}`} style={styleByIndex(i)}>
+              <TableCell key={`thc-${i}`} style={styleByIndex(i)}>
                 {x.name}
-              </TableHeaderColumn>
+              </TableCell>
             ))
           }
         </TableRow>
-      </TableHeader>
+      </TableHead>
       <TableBody displayRowCheckbox={false} showRowHover>
         {reviews.map((x, i) => row(x, i, header))}
       </TableBody>

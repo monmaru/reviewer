@@ -74,15 +74,14 @@ func (s *Server) route(db repository.DB, reportDir string) *mux.Router {
 	// Static files
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "public/index.html")
-	})
+	}).Methods("GET")
 	router.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusMovedPermanently)
-	})
+	}).Methods("GET")
 	router.HandleFunc("/report", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusMovedPermanently)
-	})
-	router.PathPrefix("/static/").Handler(
-		http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
+	}).Methods("GET")
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("public")))).Methods("GET")
 	router.PathPrefix("/download/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		paths := strings.Split(r.URL.Path, "/")
 		data, err := ioutil.ReadFile(filepath.Join(reportDir, paths[len(paths)-1]))
@@ -95,7 +94,7 @@ func (s *Server) route(db repository.DB, reportDir string) *mux.Router {
 			w.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 		}
 		w.Write(data)
-	})
+	}).Methods("GET")
 	return router
 }
 

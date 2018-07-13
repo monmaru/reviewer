@@ -1,6 +1,8 @@
 import React from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -16,35 +18,38 @@ const styles = {
 
 const SelectMenu = props => (
   <div className="select-fields">
-    <SelectField
-      style={styles.customWidth}
-      floatingLabelText="Platform"
-      onChange={(event, key, payload) => {
-        props.setPlatform(payload);
-        props.startFetch();
-      }}
-      value={props.platform}
-      maxHeight={300}
-    >
-      {listPlatform.map(platform =>
-        <MenuItem key={platform} value={platform} primaryText={platform} />)}
-    </SelectField>
-    <SelectField
-      style={styles.customWidth}
-      floatingLabelText="App name"
-      onChange={(event, key, payload) => {
-        props.setAppName(payload);
-        props.startFetch();
-      }}
-      value={props.appName}
-      maxHeight={300}
-    >
-      {listAppName.map(name =>
-        <MenuItem key={name} value={name} primaryText={name} />)}
-    </SelectField>
+    <FormControl>
+      <InputLabel htmlFor="platform">Platform</InputLabel>
+      <Select
+        style={styles.customWidth}
+        onChange={(event) => {
+          props.setPlatform(event.target.value);
+          props.startFetch();
+        }}
+        value={props.platform}
+        maxHeight={300}
+      >
+        {listPlatform.map(platform =>
+          <MenuItem value={platform}>{platform}</MenuItem>)}
+      </Select>
+    </FormControl>
+    <FormControl>
+      <InputLabel htmlFor="AppName">App name</InputLabel>
+      <Select
+        style={styles.customWidth}
+        onChange={(event) => {
+          props.setAppName(event.target.value);
+          props.startFetch();
+        }}
+        value={props.appName}
+        maxHeight={300}
+      >
+        {listAppName.map(name =>
+          <MenuItem value={name}>{name}</MenuItem>)}
+      </Select>
+    </FormControl>
   </div>
 );
-
 
 SelectMenu.propTypes = {
   platform: PropTypes.string.isRequired,
