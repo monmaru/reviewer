@@ -7,3 +7,5 @@ exports.listAppName = [
   'セブン−イレブン マルチコピー',
   'netprint',
 ];
+
+exports.numberOfReviews = 500;

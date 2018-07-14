@@ -1,7 +1,6 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import { fullWhite } from 'material-ui/styles/colors';
-import FileDownload from 'material-ui/svg-icons/file/file-download';
+import Button from '@material-ui/core/Button';
+import FileDownload from '@material-ui/icons/FileDownload';
 
 
 const styles = {
@@ -17,14 +16,9 @@ const styles = {
     margin: 30,
     width: '200px',
     height: '80px',
-  },
-  buttonLabel: {
     fontSize: '26px',
-    color: 'white',
   },
 };
-
-const buttonColor = '#9E9E9E';
 
 const Report = () => (
   <div style={styles.page}>
@@ -32,26 +26,26 @@ const Report = () => (
     収集した全てのレビューをExcelにまとめています。<br />
     ボタンをクリックするとダウンロードできます。<br />
     </p>
-    <RaisedButton
-      backgroundColor={buttonColor}
+    <Button
+      variant="contained"
       href="/download/AppStoreReviews.xlsx"
       download="AppStoreReviews.xlsx"
-      label="iOS"
-      labelPosition="before"
-      labelStyle={styles.buttonLabel}
-      icon={<FileDownload color={fullWhite} />}
+      color="secondary"
       style={styles.button}
-    />
-    <RaisedButton
-      backgroundColor={buttonColor}
+    >
+      <FileDownload />
+      iOS
+    </Button>
+    <Button
+      variant="contained"
       href="/download/GooglePlayReviews.xlsx"
       download="GooglePlayReviews.xlsx"
-      label="Android"
-      labelPosition="before"
-      labelStyle={styles.buttonLabel}
-      icon={<FileDownload color={fullWhite} />}
+      color="secondary"
       style={styles.button}
-    />
+    >
+      <FileDownload />
+      Android
+    </Button>
   </div>
 );
 
