@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,6 +9,17 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: '#919191', // use secondary main color
+    color: theme.palette.common.white,
+    fontSize: 13,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
 const styleByIndex = (idx) => {
   switch (idx) {
     case 0:
@@ -15,40 +27,35 @@ const styleByIndex = (idx) => {
         width: '13%',
         wordWrap: 'break-word',
         whiteSpace: 'normal',
-        fontSize: '14px',
       };
     case 1:
       return {
         width: '47%',
         wordWrap: 'break-word',
         whiteSpace: 'normal',
-        fontSize: '14px',
       };
     case 2:
       return {
         width: '10%',
         wordWrap: 'break-word',
         whiteSpace: 'normal',
-        fontSize: '14px',
       };
     case 3:
-      return { width: '5%', fontSize: '14px' };
+      return { width: '5%' };
     case 4:
       return {
         width: '15%',
         wordWrap: 'break-word',
         whiteSpace: 'normal',
-        fontSize: '14px',
       };
     case 5:
       return {
         width: '10%',
         wordWrap: 'break-word',
         whiteSpace: 'normal',
-        fontSize: '14px',
       };
     default:
-      return { width: '10%', fontSize: '14px' };
+      return { width: '10%' };
   }
 };
 
@@ -83,9 +90,9 @@ const row = (x, i) => (
   <TableRow key={`tr-${i}`}>
     {
       header.map((y, k) => (
-        <TableCell key={`trc-${k}`} style={styleByIndex(k)}>
+        <CustomTableCell key={`trc-${k}`} style={styleByIndex(k)}>
           {x[y.prop]}
-        </TableCell>
+        </CustomTableCell>
       ))
     }
   </TableRow>
@@ -99,9 +106,9 @@ const ReviewTable = ({ reviews }) => (
           <TableRow>
             {
               header.map((x, i) => (
-                <TableCell key={`thc-${i}`} style={styleByIndex(i)}>
+                <CustomTableCell key={`thc-${i}`} style={styleByIndex(i)}>
                   {x.name}
-                </TableCell>
+                </CustomTableCell>
               ))
             }
           </TableRow>

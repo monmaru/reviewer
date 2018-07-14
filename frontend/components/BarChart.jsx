@@ -13,11 +13,11 @@ const BarChart = ({ reviews }) => {
     datasets: [
       {
         label: 'Star',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
+        backgroundColor: 'rgba(153, 102, 255, 0.3)',
+        borderColor: 'rgb(153, 102, 255)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
+        hoverBackgroundColor: 'rgba(153, 102, 255, 0.5)',
+        hoverBorderColor: 'rgb(153, 102, 255)',
         data: star,
       },
     ],
