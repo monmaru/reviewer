@@ -16,10 +16,7 @@ const styles = {
     margin: 30,
     width: '200px',
     height: '80px',
-  },
-  buttonLabel: {
     fontSize: '26px',
-    color: 'white',
   },
 };
 
@@ -33,6 +30,7 @@ const Report = () => (
       variant="contained"
       href="/download/AppStoreReviews.xlsx"
       download="AppStoreReviews.xlsx"
+      color="secondary"
       style={styles.button}
     >
       <FileDownload />
@@ -42,6 +40,7 @@ const Report = () => (
       variant="contained"
       href="/download/GooglePlayReviews.xlsx"
       download="GooglePlayReviews.xlsx"
+      color="secondary"
       style={styles.button}
     >
       <FileDownload />

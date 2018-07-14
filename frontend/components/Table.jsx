@@ -5,24 +5,50 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 
 const styleByIndex = (idx) => {
   switch (idx) {
     case 0:
-      return { width: '13%', wordWrap: 'break-word', whiteSpace: 'normal' };
+      return {
+        width: '13%',
+        wordWrap: 'break-word',
+        whiteSpace: 'normal',
+        fontSize: '14px',
+      };
     case 1:
-      return { width: '47%', wordWrap: 'break-word', whiteSpace: 'normal' };
+      return {
+        width: '47%',
+        wordWrap: 'break-word',
+        whiteSpace: 'normal',
+        fontSize: '14px',
+      };
     case 2:
-      return { width: '10%', wordWrap: 'break-word', whiteSpace: 'normal' };
+      return {
+        width: '10%',
+        wordWrap: 'break-word',
+        whiteSpace: 'normal',
+        fontSize: '14px',
+      };
     case 3:
-      return { width: '5%' };
+      return { width: '5%', fontSize: '14px' };
     case 4:
-      return { width: '15%', wordWrap: 'break-word', whiteSpace: 'normal' };
+      return {
+        width: '15%',
+        wordWrap: 'break-word',
+        whiteSpace: 'normal',
+        fontSize: '14px',
+      };
     case 5:
-      return { width: '10%', wordWrap: 'break-word', whiteSpace: 'normal' };
+      return {
+        width: '10%',
+        wordWrap: 'break-word',
+        whiteSpace: 'normal',
+        fontSize: '14px',
+      };
     default:
-      return { width: '10%' };
+      return { width: '10%', fontSize: '14px' };
   }
 };
 
@@ -67,22 +93,24 @@ const row = (x, i) => (
 
 const ReviewTable = ({ reviews }) => (
   <div className="reviews-table">
-    <Table selectable={false}>
-      <TableHead displaySelectAll={false} adjustForCheckbox={false}>
-        <TableRow>
-          {
-            header.map((x, i) => (
-              <TableCell key={`thc-${i}`} style={styleByIndex(i)}>
-                {x.name}
-              </TableCell>
-            ))
-          }
-        </TableRow>
-      </TableHead>
-      <TableBody displayRowCheckbox={false} showRowHover>
-        {reviews.map((x, i) => row(x, i, header))}
-      </TableBody>
-    </Table>
+    <Paper>
+      <Table selectable={false}>
+        <TableHead displaySelectAll={false} adjustForCheckbox={false}>
+          <TableRow>
+            {
+              header.map((x, i) => (
+                <TableCell key={`thc-${i}`} style={styleByIndex(i)}>
+                  {x.name}
+                </TableCell>
+              ))
+            }
+          </TableRow>
+        </TableHead>
+        <TableBody displayRowCheckbox={false} showRowHover>
+          {reviews.map((x, i) => row(x, i, header))}
+        </TableBody>
+      </Table>
+    </Paper>
   </div>
 );
 

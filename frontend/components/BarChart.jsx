@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HorizontalBar } from 'react-chartjs-2';
 
+
 const BarChart = ({ reviews }) => {
   const star = [0, 0, 0, 0, 0];
   reviews.forEach((r) => {
     star[Math.abs(r.star - 5)] += 1;
   });
   const data = {
-    labels: ['★★★★★', '★★★★☆', '★★★☆☆', '★★☆☆☆', '★☆☆☆☆'],
+    labels: ['⭐⭐⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐', '⭐⭐', '⭐'],
     datasets: [
       {
         label: 'Star',

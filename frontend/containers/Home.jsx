@@ -8,6 +8,7 @@ import Table from '../components/Table';
 import BarChart from '../components/BarChart';
 import ScrollToTopButton from '../components/ScrollToTopButton';
 
+
 const Home = (props) => {
   if (props.alertMessage) {
     alert(props.alertMessage);

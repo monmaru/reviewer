@@ -17,14 +17,13 @@ import About from '../components/About';
 import Report from '../components/Report';
 import { startFetch } from '../actions/';
 import withRoot from '../withRoot';
+import { numberOfReviews } from '../config';
 
-const BackGroundColor = '#212121';
 const styles = {
   main: {
     paddingTop: 80,
   },
   appBar: {
-    backgroundColor: BackGroundColor,
     position: 'fixed',
     top: 0,
   },
@@ -33,8 +32,7 @@ const styles = {
   },
   tab: {
     width: '150px',
-    backgroundColor: BackGroundColor,
-    color: 'white',
+    fontWeight: 500,
   },
 };
 
@@ -54,30 +52,33 @@ class App extends Component {
           <AppBar style={styles.appBar}>
             <Toolbar>
               <Typography variant="title" color="inherit">
-                Recent mobile app 100 reviews
+                Recent mobile app {numberOfReviews} reviews
               </Typography>
-              <Tabs value={this.props.location.pathname} style={styles.tabs}>
-                <Link to="/">
-                  <Tab
-                    label="Home"
-                    value="/"
-                    style={styles.tab}
-                  />
-                </Link>
-                <Link to="/report">
-                  <Tab
-                    label="Report"
-                    value="/report"
-                    style={styles.tab}
-                  />
-                </Link>
-                <Link to="/about">
-                  <Tab
-                    label="About"
-                    value="/about"
-                    style={styles.tab}
-                  />
-                </Link>
+              <Tabs
+                value={this.props.location.pathname}
+                style={styles.tabs}
+              >
+                <Tab
+                  label="Home"
+                  value="/"
+                  style={styles.tab}
+                  component={Link}
+                  to="/"
+                />
+                <Tab
+                  label="Report"
+                  value="/report"
+                  style={styles.tab}
+                  component={Link}
+                  to="/report"
+                />
+                <Tab
+                  label="About"
+                  value="/about"
+                  style={styles.tab}
+                  component={Link}
+                  to="/about"
+                />
               </Tabs>
             </Toolbar>
           </AppBar>

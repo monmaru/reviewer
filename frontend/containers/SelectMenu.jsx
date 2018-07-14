@@ -11,17 +11,20 @@ import { setPlatform, setAppName, startFetch } from '../actions/';
 
 
 const styles = {
-  customWidth: {
+  form: {
+    margin: '12px 0px',
+  },
+  select: {
     width: 350,
   },
 };
 
 const SelectMenu = props => (
   <div className="select-fields">
-    <FormControl>
+    <FormControl style={styles.form}>
       <InputLabel htmlFor="platform">Platform</InputLabel>
       <Select
-        style={styles.customWidth}
+        style={styles.select}
         onChange={(event) => {
           props.setPlatform(event.target.value);
           props.startFetch();
@@ -33,10 +36,10 @@ const SelectMenu = props => (
           <MenuItem value={platform}>{platform}</MenuItem>)}
       </Select>
     </FormControl>
-    <FormControl>
-      <InputLabel htmlFor="AppName">App name</InputLabel>
+    <FormControl style={styles.form}>
+      <InputLabel htmlFor="application">Application</InputLabel>
       <Select
-        style={styles.customWidth}
+        style={styles.select}
         onChange={(event) => {
           props.setAppName(event.target.value);
           props.startFetch();

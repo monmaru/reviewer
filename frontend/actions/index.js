@@ -1,4 +1,5 @@
 import fetchReviews from '../domain/APIClient';
+import { numberOfReviews } from '../config';
 
 export const setReviews = reviews => dispatch => dispatch({ type: 'CHANGE_REVIEWS', reviews });
 
@@ -13,7 +14,7 @@ export const setAlertMessage = alertMessage => dispatch => dispatch({ type: 'ALE
 export const startFetch = () => (dispatch, getState) => {
   const state = getState();
   return new Promise(resolve => setTimeout(() => resolve(), state.loading ? 200 : 0))
-    .then(() => fetchReviews(state.platform, state.appName, 100))
+    .then(() => fetchReviews(state.platform, state.appName, numberOfReviews))
     .then((reviews) => {
       dispatch(setReviews(reviews));
       dispatch(setLoading(false));

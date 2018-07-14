@@ -10,6 +10,7 @@ import createHistory from 'history/createBrowserHistory';
 import rootReducer from './reducers/';
 import App from './containers/App';
 
+
 const history = createHistory();
 const store = createStore(
   rootReducer,

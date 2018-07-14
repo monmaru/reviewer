@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { numberOfReviews } from '../config';
+
+
 const styles = {
   page: {
     height: '100%',
@@ -15,11 +18,13 @@ const styles = {
   },
 };
 
+const toTwoByteCharacter = s => s.replace(/[A-Za-z0-9]/g, ss => String.fromCharCode(ss.charCodeAt(0) + 65248));
+
 const About = () => (
   <div style={styles.page}>
     <p>
     各モバイルアプリのレビューのうち、<br />
-    新着１００件を表示するサイトです。<br />
+    新着{toTwoByteCharacter(numberOfReviews.toString())}件を表示するサイトです。<br />
     以下のフレームワークを使用しています。<br />
     </p>
     <img
