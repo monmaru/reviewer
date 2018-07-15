@@ -34,6 +34,11 @@ const styles = {
     width: '150px',
     fontWeight: 500,
   },
+  icon: {
+    width: '32px',
+    height: '32px',
+    marginRight: '4px',
+  },
 };
 
 const ConnectedSwitch = connect(state => ({
@@ -51,6 +56,11 @@ class App extends Component {
         <div className="main" style={styles.main}>
           <AppBar style={styles.appBar}>
             <Toolbar>
+              <img
+                src="/static/smartphone.png"
+                alt="smartphone"
+                style={styles.icon}
+              />
               <Typography variant="title" color="inherit">
                 Recent mobile app {numberOfReviews} reviews
               </Typography>
