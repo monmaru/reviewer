@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import SelectMenu from './SelectMenu';
 import Table from '../components/Table';
+import Average from '../components/Average';
 import BarChart from '../components/BarChart';
 import ScrollToTopButton from '../components/ScrollToTopButton';
 
@@ -27,6 +28,7 @@ const Home = (props) => {
       <section className="header-section">
         <SelectMenu />
         <BarChart reviews={props.reviews} />
+        <Average reviews={props.reviews} />
       </section>
       <Table reviews={props.reviews} />
       <ScrollToTopButton />

@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import FileDownload from '@material-ui/icons/FileDownload';
+import Typography from '@material-ui/core/Typography';
 
 
 const styles = {
@@ -8,7 +9,6 @@ const styles = {
     height: '100%',
     width: '100%',
     margin: 20,
-    fontSize: '30px',
     textAlign: 'center',
     display: 'inline-block',
   },
@@ -22,10 +22,10 @@ const styles = {
 
 const Report = () => (
   <div style={styles.page}>
-    <p>
-    収集した全てのレビューをExcelにまとめています。<br />
-    ボタンをクリックするとダウンロードできます。<br />
-    </p>
+    <Typography variant="display1" gutterBottom>
+      収集した全てのレビューをExcelにまとめています。<br />
+      ボタンをクリックするとダウンロードできます。<br />
+    </Typography>
     <Button
       variant="contained"
       href="/download/AppStoreReviews.xlsx"

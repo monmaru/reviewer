@@ -15,7 +15,7 @@ const styles = {
     margin: '12px 0px',
   },
   select: {
-    width: 350,
+    width: 320,
   },
 };
 

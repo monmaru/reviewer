@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 import { numberOfReviews } from '../config';
 
@@ -8,7 +9,6 @@ const styles = {
     height: '100%',
     width: '100%',
     margin: 20,
-    fontSize: '30px',
     textAlign: 'center',
     display: 'inline-block',
   },
@@ -22,11 +22,11 @@ const toTwoByteCharacter = s => s.replace(/[A-Za-z0-9]/g, ss => String.fromCharC
 
 const About = () => (
   <div style={styles.page}>
-    <p>
-    各モバイルアプリのレビューのうち、<br />
-    新着{toTwoByteCharacter(numberOfReviews.toString())}件を表示するサイトです。<br />
-    以下のフレームワークを使用しています。<br />
-    </p>
+    <Typography variant="display1" gutterBottom>
+      各モバイルアプリのレビューのうち、<br />
+      新着{toTwoByteCharacter(numberOfReviews.toString())}件を表示するサイトです。<br />
+      以下のフレームワークを使用しています。<br />
+    </Typography>
     <img
       src="/static/ReactRedux.jpg"
       alt="React × Redux"

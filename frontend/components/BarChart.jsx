@@ -27,7 +27,7 @@ const BarChart = ({ reviews }) => {
     <div>
       <HorizontalBar
         data={data}
-        width={450}
+        width={500}
         height={200}
         options={{
           scales: {
