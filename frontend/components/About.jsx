@@ -24,7 +24,7 @@ const About = () => (
   <div style={styles.page}>
     <Typography variant="display1" gutterBottom>
       各モバイルアプリのレビューのうち、<br />
-      新着{toTwoByteCharacter(numberOfReviews.toString())}件を表示するサイトです。<br />
+      新着{toTwoByteCharacter(numberOfReviews.toString())}件をざっくりと確認するためのサイトです。<br />
       以下のフレームワークを使用しています。<br />
     </Typography>
     <img

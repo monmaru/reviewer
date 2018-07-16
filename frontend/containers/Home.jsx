@@ -18,7 +18,7 @@ const Home = (props) => {
   if (props.loading) {
     return (
       <div className="progress">
-        <CircularProgress color="#757575" size={100} thickness={5} />
+        <CircularProgress color="primary" size={100} thickness={5} />
       </div>
     );
   }

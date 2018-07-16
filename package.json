@@ -6,7 +6,7 @@
   "author": "monmaru",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^1.3.0",
+    "@material-ui/core": "^1.4.0",
     "@material-ui/icons": "^1.1.0",
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
