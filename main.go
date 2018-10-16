@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/monmaru/reviewer/backend"
 )
 

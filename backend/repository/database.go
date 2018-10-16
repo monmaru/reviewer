@@ -4,15 +4,11 @@ import (
 	"database/sql"
 	"fmt"
 
+	// use sqlite3
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/monmaru/reviewer/backend/model"
 	"github.com/pkg/errors"
 )
-
-// DB ...
-type DB interface {
-	ReadIOSApp(appName string, limit int) ([]model.Review, error)
-	ReadAndroidApp(appName string, limit int) ([]model.Review, error)
-}
 
 // ReviewRepository ...
 type ReviewRepository struct {

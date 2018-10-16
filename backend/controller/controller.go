@@ -19,6 +19,11 @@ type ReviewController struct {
 	cache  *cache.Cache
 }
 
+type parameter struct {
+	limit int
+	name  string
+}
+
 // New ...
 func New(db repository.DB, logger *zap.Logger) *ReviewController {
 	return &ReviewController{
@@ -28,33 +33,36 @@ func New(db repository.DB, logger *zap.Logger) *ReviewController {
 	}
 }
 
-func readParams(r *http.Request) (string, int, error) {
+func readParams(r *http.Request) (parameter, error) {
+	p := parameter{}
 	q := r.URL.Query()
 	limit, err := strconv.Atoi(q.Get("limit"))
 	if err != nil {
-		return "", 0, err
+		return p, err
 	}
 	appName := mux.Vars(r)["name"]
-	return appName, limit, nil
+	p.limit = limit
+	p.name = appName
+	return p, nil
 }
 
 // GetIOSReviews ...
 func (c *ReviewController) GetIOSReviews(w http.ResponseWriter, r *http.Request) error {
-	appName, limit, err := readParams(r)
+	p, err := readParams(r)
 	if err != nil {
 		return err
 	}
 
-	c.logger.Info("GetIOSReviews", zap.String("app", appName), zap.Int("limit", limit))
+	c.logger.Info("GetIOSReviews", zap.String("app", p.name), zap.Int("limit", p.limit))
 	defer c.logger.Sync()
 
-	cacheKey := "ios" + appName + strconv.Itoa(limit)
+	cacheKey := "ios" + p.name + strconv.Itoa(p.limit)
 	if cv, found := c.cache.Get(cacheKey); found {
-		c.logger.Info("Cache hit", zap.String("app", appName), zap.Int("limit", limit))
+		c.logger.Info("Cache hit", zap.String("app", p.name), zap.Int("limit", p.limit))
 		return JSON(w, http.StatusOK, cv)
 	}
 
-	reviews, err := c.db.ReadIOSApp(appName, limit)
+	reviews, err := c.db.ReadIOSApp(p.name, p.limit)
 	if err != nil {
 		return err
 	}
@@ -65,21 +73,21 @@ func (c *ReviewController) GetIOSReviews(w http.ResponseWriter, r *http.Request)
 
 // GetAndroidReviews ...
 func (c *ReviewController) GetAndroidReviews(w http.ResponseWriter, r *http.Request) error {
-	appName, limit, err := readParams(r)
+	p, err := readParams(r)
 	if err != nil {
 		return err
 	}
 
-	c.logger.Info("GetAndroidReviews", zap.String("app", appName), zap.Int("limit", limit))
+	c.logger.Info("GetAndroidReviews", zap.String("app", p.name), zap.Int("limit", p.limit))
 	defer c.logger.Sync()
 
-	cacheKey := "android" + appName + strconv.Itoa(limit)
+	cacheKey := "android" + p.name + strconv.Itoa(p.limit)
 	if cv, found := c.cache.Get(cacheKey); found {
-		c.logger.Info("Cache hit", zap.String("app", appName), zap.Int("limit", limit))
+		c.logger.Info("Cache hit", zap.String("app", p.name), zap.Int("limit", p.limit))
 		return JSON(w, http.StatusOK, cv)
 	}
 
-	reviews, err := c.db.ReadAndroidApp(appName, limit)
+	reviews, err := c.db.ReadAndroidApp(p.name, p.limit)
 	if err != nil {
 		return err
 	}
