@@ -17,6 +17,12 @@ const theme = createMuiTheme({
     },
     // error: will use the default color
   },
+  typography: {
+    fontFamily: [
+      'Noto Sans',
+      'sans-serif',
+    ].join(','),
+  },
 });
 
 export default theme;
